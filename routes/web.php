@@ -23,4 +23,4 @@ Route::post('change-password', 'ChangerPasswordController@store')->name('change.
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('invoice/{invoice}', 'PdfController');
+Route::get('generate-pdf','PdfController@generatePDF');

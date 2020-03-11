@@ -1,5 +1,3 @@
-// config/dompdf.php
-
 <?php
 
 return [
