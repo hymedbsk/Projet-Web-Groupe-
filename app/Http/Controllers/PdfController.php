@@ -14,7 +14,7 @@ class PdfController extends Controller
      */
     public function generatePDF()
     {
-        $data = ['title' => 'Welcome to HDTuto.com'];
+        $data = ['title' => 'Facture'];
         $pdf = PDF::loadView('myPDF', $data);
   
         return $pdf->download('invoice.pdf');
