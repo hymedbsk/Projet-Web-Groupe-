@@ -24,7 +24,15 @@ class PdfController extends Controller
           'clientRoad' => 'Avenue du Ciseau 15',
           'clientLocality' => '1348 Louvain-la-Neuve',
           'clientCountry' => 'Belgique',
-          'totalInvoice' => 1000];
+          'detailDesc' => 'Service en heure forfaitaire',
+          'detailQty' => 2,
+          'detailPriceHtva' => number_format(40, 2, ',', '.'),
+          'TVA' => '21%',
+          'detailPrice' => number_format((40 * 1.21), 2, ',', '.'),
+          'detailFinalPrice' => number_format(((40 * 1.21) * 2), 2, ',', '.'),
+          'totalInvoice' => number_format(290.4, 2, ',', '.'),
+          'dateLimitPayment' => date("d/m/Y",strtotime('+30 days'))
+        ];
         $pdf = PDF::loadView('myPDF', $data);
   
         return $pdf->download('invoice.pdf');
