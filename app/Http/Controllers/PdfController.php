@@ -27,7 +27,7 @@ class PdfController extends Controller
           'detailDesc' => 'Service en heure forfaitaire',
           'detailQty' => 2,
           'detailPriceHtva' => number_format(40, 2, ',', '.'),
-          'TVA' => '21%',
+          'TVA' => '21 %',
           'detailPrice' => number_format((40 * 1.21), 2, ',', '.'),
           'detailFinalPrice' => number_format(((40 * 1.21) * 2), 2, ',', '.'),
           'totalInvoice' => number_format(290.4, 2, ',', '.'),
