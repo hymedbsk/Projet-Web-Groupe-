@@ -26,3 +26,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('generate-pdf','PdfController@generatePDF');
 
 Route::get('pdf', 'PDFMaker@gen');
+Route::get('formulairePdf', 'FormPdfController@index');
