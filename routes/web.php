@@ -16,10 +16,11 @@ Route::get('/', function () {
 });
 Route::get('contact', 'ContactController@getForm');
 Route::post('contact', 'ContactController@postForm');
-Route::get('change-password', 'ChangerPasswordController@index');
 Route::view('palteforme', 'home');
 Route::view('compte','compte');
-Route::post('change-password', 'ChangerPasswordController@store')->name('change.password');
 Auth::routes();
+Route::get('/test', 'testcontroler@do');
+Route::get('/user', 'UserController@index');
+Route::view('/error','error');
 
 Route::get('/home', 'HomeController@index')->name('home');
