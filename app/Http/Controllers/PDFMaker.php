@@ -51,8 +51,8 @@ class PDFMaker extends Controller {
                 <br>1348 Louvain-la-Neuve
                 <br>Belgique</p>
             </div>
-            <p><strong>Facture</strong></p>
-            <p>Date de la facture : " . date("d/m/Y") . "</p>
+            <p><strong>Facture n°1</strong></p>
+            <p>Date de la facture : " . date('d/m/Y') . "</p>
             <hr>
             <div class='details'>
                 <h2>Détails de la facture :</h2>

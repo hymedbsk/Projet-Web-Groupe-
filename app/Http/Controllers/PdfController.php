@@ -15,6 +15,7 @@ class PdfController extends Controller
     public function generatePDF()
     {
         $data = ['title' => 'Facture',
+          'invoiceNumber' => 1,
           'date' => date("d/m/Y"),
           'providerName' => 'EPHEC ASBL',
           'providerRoad' => 'Avenue Konrad Adenauer 3',

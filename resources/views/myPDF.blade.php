@@ -40,7 +40,7 @@
 		<br>{{ $clientLocality }}
 		<br>{{ $clientCountry }}</p>
 	</div>
-	<p><strong>{{ $title }}</strong></p>
+	<p><strong>{{ $title }} n° {{ $invoiceNumber }}</strong></p>
 	<p>Date de la facture : {{ $date }}</p>
 	<hr>
 	<div class="details">
