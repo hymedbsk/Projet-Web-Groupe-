@@ -12,3 +12,8 @@ EPHEC Entreprendre voudrait faciliter la communication entre les étudiants et l
 
 Le projet consiste à créer une plateforme de mise en contact d'étudiants prestataires de services avec des étudiants entrepreneurs présentant des demandes à réaliser en tant que jobs étudiants.
 La plateforme doit être facile d’utilisation tant sur ordinateur que sur appareil mobile (tablette et smartphone).
+
+
+#### Document :
+
+Branche master /doc
