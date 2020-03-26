@@ -26,6 +26,7 @@
             display: inline-block;
             min-width: 25%;
         }
+        small { color: #FF5A00; }
         #provider input, #client input { width: 250px; }
         #details input { width: 300px; }
         #numbers input { width: 80px; }
@@ -48,24 +49,25 @@
 </head>
 <body>
   <h1>Formulaire de création de facture</h1>
-    <form action="formPdfGenerate.php" method="post">
+    <form action="<?php echo action('PDFMaker@gen'); ?>" method="post">
+    @csrf
     <h2>Prestataire</h2>
     <div id="provider">
       <div class="c100">
         <label for="providerName">Nom : </label>
-        <input type="text" id="providerName" name="providerName" value="EPHEC ASBL">
+        <input type="text" id="providerName" name="providerName" placeholder="EPHEC ASBL" required>
       </div>
       <div class="c100">
         <label for="providerRoad">Rue : </label>
-        <input type="text" id="providerRoad" name="providerRoad" value="Avenue Konrad Adenauer 3">
+        <input type="text" id="providerRoad" name="providerRoad" placeholder="Avenue Konrad Adenauer 3" required>
       </div>
       <div class="c100">
         <label for="providerLocality">Localité (code postal + nom de ville) : </label>
-        <input type="text" id="providerLocality" name="providerLocality" value="1200 Woluwe-Saint-Lambert">
+        <input type="text" id="providerLocality" name="providerLocality" placeholder="1200 Woluwe-Saint-Lambert" required>
       </div>
       <div class="c100">
         <label for="providerCountry">Pays : </label>
-        <select id="providerCountry" name="providerCountry">
+        <select id="providerCountry" name="providerCountry" required>
           <optgroup label="Europe">
               <option value="belgium" default>Belgique</option>
               <option value="france">France</option>
@@ -80,19 +82,19 @@
     <div id="client">
       <div class="c100">
         <label for="clientName">Nom : </label>
-        <input type="text" id="clientName" name="clientName">
+        <input type="text" id="clientName" name="clientName" required>
       </div>
       <div class="c100">
         <label for="clientRoad">Rue : </label>
-        <input type="text" id="clientRoad" name="clientRoad">
+        <input type="text" id="clientRoad" name="clientRoad" required>
       </div>
       <div class="c100">
         <label for="clientLocality">Localité (code postal + nom de ville) : </label>
-        <input type="text" id="clientLocality" name="clientLocality">
+        <input type="text" id="clientLocality" name="clientLocality" required>
       </div>
       <div class="c100">
         <label for="clientCountry">Pays : </label>
-        <select id="clientCountry" name="clientCountry">
+        <select id="clientCountry" name="clientCountry" required>
           <optgroup label="Europe">
               <option value="belgium" default>Belgique</option>
               <option value="france">France</option>
@@ -106,16 +108,21 @@
     <hr>
     <h2>Informations complémentaires sur la facture</h2>
     <div class="c100" id="numbers">
+      <label for="title">Type de document : </label>
+      <input type="text" id="title" name="title" placeholder="Facture" required>
+      <small>Facture, note de crédit, etc.</small>
+    </div>
+    <div class="c100" id="numbers">
       <label for="invoiceNumber">Numéro de facture : </label>
-      <input type="number" min=1 step=1 id="invoiceNumber" name="invoiceNumber" value=1>
+      <input type="number" min=1 step=1 id="invoiceNumber" name="invoiceNumber" placeholder=1 required>
     </div>
     <div class="c100">
       <label for="date">Date d'émission : </label>
-      <input type="date" id="date" name="date">
+      <input type="date" id="date" name="date" placeholder="DD-MM-YYYY" title="Veuillez entre une date en respectant le format suivant : 30-09-1969" required>
     </div>
     <div class="c100">
       <label for="dateLimitPayment">Date limite de paiement : </label>
-      <input type="date" id="dateLimitPayment" name="dateLimitPayment">
+      <input type="date" id="dateLimitPayment" name="dateLimitPayment" placeholder="DD-MM-YYYY" title="Veuillez entre une date en respectant le format suivant : 30-09-1969">
     </div>
     <hr>
     <h2>Elément à facturer</h2>
@@ -128,7 +135,7 @@
       </div>
       <div class="c100" id="numbers">
         <label for="detailQty">Quantité (valeur unitaire) : </label>
-        <input type="number" min=0 step=0.25 id="detailQty" name="detailQty" value=1>    
+        <input type="number" min=0 step=0.25 id="detailQty" name="detailQty" placeholder=1>    
       </div>
       <div class="c100" id="numbers">
         <label for="detailPriceHtva">Prix unitaire (HTVA) : </label>
@@ -144,7 +151,7 @@
       </div>
       <div class="c100" id="numbers">
         <label for="totalInvoice">Coût total de la facture : </label>
-        <input type="number" min=0 step=0.01 id="totalInvoice" name="totalInvoice">
+        <input type="number" min=0 step=0.01 id="totalInvoice" name="totalInvoice" required>
       </div>
     </div>
     <hr>
