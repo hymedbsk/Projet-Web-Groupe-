@@ -1,27 +1,35 @@
-<?php 
-namespace App\Repositories; 
+<?php
 
-abstract class ResourceRepository{ 
-    
-    protected $model; 
-    
-    public function getPaginate($n) { 
-        return $this->model->paginate($n); 
-    } 
-    
-    public function store(Array $inputs) { 
-        return $this->model->create($inputs); 
-    } 
+namespace App\Repositories;
 
-    public function getById($id) { 
-        return $this->model->findOrFail($id); 
-    } 
+abstract class ResourceRepository
+{
 
-    public function update($id, Array $inputs) { 
-        $this->getById($id)->update($inputs); 
-    } 
-    
-    public function destroy($id) { 
-        $this->getById($id)->delete(); 
-    } 
+    protected $model;
+
+    public function getPaginate($n)
+	{
+		return $this->model->paginate($n);
+	}
+
+	public function store(Array $inputs)
+	{
+		return $this->model->create($inputs);
+	}
+
+	public function getById($id)
+	{
+		return $this->model->findOrFail($id);
+	}
+
+	public function update($id, Array $inputs)
+	{
+		$this->getById($id)->update($inputs);
+	}
+
+	public function destroy($id)
+	{
+		$this->getById($id)->delete();
+	}
+
 }

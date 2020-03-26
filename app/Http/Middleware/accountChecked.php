@@ -15,7 +15,7 @@ class accountChecked
      * @return mixed
      */
 
-    
+
     public function handle($request, Closure $next)
     {
         // echo($request->user());
@@ -26,6 +26,6 @@ class accountChecked
         else{
             return new RedirectResponse(url('/error'));
         }
-        
+
     }
 }
