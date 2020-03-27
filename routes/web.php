@@ -29,3 +29,6 @@ Route::post('/profil', 'ChangerPasswordController@store')->name('change.password
 
 Route::get('/home', 'homeController@index');
 Route::resource('post', 'PostController', ['except' => ['show', 'edit', 'update']]);
+
+Route::get('formPdf', 'FormPdfController@index');
+Route::post('genPdf', 'PDFMaker@gen');
