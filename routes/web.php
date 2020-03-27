@@ -12,17 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('accueil');
+    return view('welcome');
 });
 Route::get('contact', 'ContactController@getForm');
 Route::post('contact', 'ContactController@postForm');
-Route::get('change-password', 'ChangerPasswordController@index');
 Route::view('palteforme', 'home');
 Route::view('compte','compte');
-Route::post('change-password', 'ChangerPasswordController@store')->name('change.password');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('user', 'UserController');
 
-Route::post('genPdf', 'PDFMaker@gen');
+
+
+Route::get('/profil', 'ChangerPasswordController@index');
+Route::post('/profil', 'ChangerPasswordController@store')->name('change.password');
+
+Route::get('/home', 'homeController@index');
+Route::resource('post', 'PostController', ['except' => ['show', 'edit', 'update']]);
+
 Route::get('formPdf', 'FormPdfController@index');
+Route::post('genPdf', 'PDFMaker@gen');
