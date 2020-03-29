@@ -68,8 +68,12 @@
                 @if(Auth()->user()->admin == 1)
 
                     <a class=" dropdown-item nav-item " href="{{ url('/user') }}" >
-                         <p>Vérifications des étudiants   </p>
-                     </a>
+                        <p>Vérifications des étudiants   </p>
+                    </a>
+
+                    <a class=" dropdown-item nav-item " href="{{ url('formPdf') }}" >
+                        <p>Formulaire de génération de facture</p>
+                    </a>
 
                 @endif
                     <a class="dropdown-item" href="{{ route('logout') }}"
