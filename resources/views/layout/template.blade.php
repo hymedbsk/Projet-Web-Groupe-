@@ -9,7 +9,6 @@
   <meta name="author" content="">
 
   <title>Ephec Entreprendre</title>
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -56,7 +55,7 @@
                             {{ Auth::user()->prenom }} <span class="caret"></span>
                         </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
 
                                     <a class=" dropdown-item nav-item " href="{{ url('/profil') }}" >
                                          <p>  Mon profil </p>
@@ -68,12 +67,8 @@
                                 @if(Auth()->user()->admin == 1)
 
                                     <a class=" dropdown-item nav-item " href="{{ url('/user') }}" >
-                                        <p>Vérifications des étudiants   </p>
-                                    </a>
-
-                                    <a class=" dropdown-item nav-item " href="{{ url('formPdf') }}" >
-                                        <p>Formulaire de génération de facture</p>
-                                    </a>
+                                         <p>Vérifications des étudiants   </p>
+                                     </a>
 
                                 @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"

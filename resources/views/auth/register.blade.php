@@ -91,11 +91,20 @@
                                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="Type" class="col-md-4 col-form-label text-md-right">Type d'étudiant</label>
 
+                                        <div class="col-md-6">
+                                            <select class="form-control" name="Type">
+                                                <option value="EN">Etudiant Entrepreneur</option>
+                                                <option value="PR">Etudiant Préstataire</option>
+                                              </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group row mb-0">
-                                        <div class="col-md-6 offset-md-4">
+                                        <div class="col-md-6 offset-md-3">
                                             <button type="submit" class="btn btn-primary">
-                                                {{ __('Register') }}
+                                                S'inscrire
                                             </button>
                                         </div>
                                     </div>

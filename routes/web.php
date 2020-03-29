@@ -19,16 +19,8 @@ Route::post('contact', 'ContactController@postForm');
 Route::view('palteforme', 'home');
 Route::view('compte','compte');
 Auth::routes();
-
-Route::resource('user', 'UserController');
-
-
-
 Route::get('/profil', 'ChangerPasswordController@index');
 Route::post('/profil', 'ChangerPasswordController@store')->name('change.password');
-
 Route::get('/home', 'homeController@index');
 Route::resource('post', 'PostController', ['except' => ['show', 'edit', 'update']]);
-
-Route::get('formPdf', 'FormPdfController@index');
-Route::post('genPdf', 'PDFMaker@gen');
+Route::resource('user', 'UserController');
