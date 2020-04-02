@@ -66,11 +66,11 @@ class UserController extends Controller
 
 		return back();
 	}
-    private function Admin($request)
+   /* private function Admin($request)
     {
         if(!$request->has('admin'))
         {
             $request->merge(['admin' => 0]);
         }
-    }
+    }*/
 }

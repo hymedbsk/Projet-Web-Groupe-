@@ -8,7 +8,7 @@
 			<div class="panel-heading"> <h3 class="panel-title">Modification d'un utilisateur</h3></div>
 			<div class="panel-body">
 
-
+{{ var_dump($user)}}
 					{!! Form::model($user, ['route' => ['user.update', $user->User_id], 'method' => 'put', 'class' => 'form-horizontal panel']) !!}
 					<div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
 					  	{!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Nom']) !!}

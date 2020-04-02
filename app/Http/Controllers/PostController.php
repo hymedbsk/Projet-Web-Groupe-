@@ -15,7 +15,7 @@ class PostController extends Controller{
     public function __construct(PostRepository $postRepository){
 
         $this->middleware('auth', ['except' => 'index']);
-		$this->middleware('admin', ['only' => 'destroy']);
+
 
 		$this->postRepository = $postRepository;
 	}
@@ -35,28 +35,46 @@ class PostController extends Controller{
 
 	public function store(PostRequest $request){
 
-        Post::create([
+        $posts = new Post;
+        $posts->Titre = $request->input('Titre');
+        $posts->Description = $request->input('Description');
+        $posts->User_id = $request->user()->User_id;
+        $posts->save();
+        /*Post::create([
             'Titre' => $request ->Titre,
             'Description' => $request ->Description,
             'User_id' => $request->user()->User_id,
-        ]);
+        ]);*/
 
-		return redirect(route('post.index'));
+		return redirect(route('post.index'))->withOk("Annonce crée");
     }
 
 
     public function edit($id){
 
-        $posts = Post::find($id);
-        return view('posts.edit', compact('posts'));
+        $posts= Post::find($id);
+
+      return view('posts.edit')->with('posts', $posts);
 
     }
 
 
+    public function update(PostRequest $request, $id){
+
+
+        $posts = Post::find($id);
+        $posts->Titre = $request->input('Titre');
+        $posts->Description = $request->input('Description');
+        $posts->User_id = $request->user()->User_id;
+        $posts->save();
+        return redirect(route('post.index'));
+    }
+
 	public function destroy($id){
 
-		$this->postRepository->destroy($id);
+		$posts = Post::find($id);
 
-		return redirect()->back();
+        $posts->delete();
+		return redirect(route('post.index'));
 	}
 }

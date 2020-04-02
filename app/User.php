@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $table = "users";
-    protected $primary_Key = "User_id";
+    protected $primaryKey = "User_id";
     /**
      * The attributes that are mass assignable.
      *
@@ -45,4 +45,11 @@ class User extends Authenticatable
 {
     // to Disable updated_at
 }
+
+public function posts(){
+
+
+    return $this->hasMany('App\Post');
+    }
+
 }
