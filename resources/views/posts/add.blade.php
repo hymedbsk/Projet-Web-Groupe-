@@ -3,6 +3,7 @@
 @section('content')
 <section class="masthead">
         <div class="container">
+
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <h2 class="justify-content-center"> Ajouter une annonce </h2>

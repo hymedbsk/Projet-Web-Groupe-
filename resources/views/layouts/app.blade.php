@@ -50,13 +50,13 @@
                   </li>
 
                 </ul>
-            </div>
+
         @if(Auth::check() and Auth()->user()->accountChecked == 1)
         <a id="navbarDropdown" class="nav-link dropdown-toggle text-uppercase "   href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             {{ Auth::user()->prenom }} <span class="caret"></span>
         </a>
 
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
 
                     <a class=" dropdown-item nav-item " href="{{ url('/profil') }}" >
                          <p>  Mon profil </p>
@@ -84,7 +84,7 @@
                     </form>
                 </div>
                 @endif
-
+            </div>
     </div>
 </nav>
 

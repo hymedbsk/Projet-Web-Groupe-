@@ -16,7 +16,10 @@ abstract class ResourceRepository
 	{
 		return $this->model->create($inputs);
 	}
-
+    public function edit($id)
+	{
+		return $this->model->edit($id);
+	}
 	public function getById($id)
 	{
 		return $this->model->findOrFail($id);

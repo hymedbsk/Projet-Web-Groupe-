@@ -55,7 +55,7 @@
                             {{ Auth::user()->prenom }} <span class="caret"></span>
                         </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
 
                                     <a class=" dropdown-item nav-item " href="{{ url('/profil') }}" >
                                          <p>  Mon profil </p>
