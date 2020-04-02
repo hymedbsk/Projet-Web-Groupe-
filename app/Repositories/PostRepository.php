@@ -25,6 +25,11 @@ class PostRepository
 	{
 
 		$this->post->create($inputs);
+    }
+    public function edit($id)
+	{
+
+		$this->post->edit($id);
 	}
 
 	public function destroy($id)

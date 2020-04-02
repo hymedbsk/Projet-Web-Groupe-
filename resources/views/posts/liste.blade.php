@@ -20,6 +20,7 @@
               <h5 class="card-title">{{ $post->Titre }}</h5>
               <p class="card-text">{{ $post->Description }}</p>
               <p class="sub-card"> {{ $post->user->prenom }} le {!! $post->Date->format('d-m-Y') !!} </p>
+              <a href="{{ url('/post/'.$post->Post_id. '/edit')}}" class="btn btn-warning"> Modifier </a>
             </div>
           </div>
 

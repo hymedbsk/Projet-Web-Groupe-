@@ -31,7 +31,7 @@
                                 <td class="text-primary"><strong>{!! $user->email !!}</strong></td>
                                 <td>{!! link_to_route('user.edit', 'Modifier', [$user->User_id], ['class' => 'btn btn-warning btn-block']) !!}</td>
                                 <td>
-                                    {!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id]]) !!}
+                                    {!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->User_id]]) !!}
                                         {!! Form::submit('Supprimer', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Vraiment supprimer cet utilisateur ?\')']) !!}
                                     {!! Form::close() !!}
                                 </td>

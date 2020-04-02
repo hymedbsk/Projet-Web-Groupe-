@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
+use APP\Post;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 use App\Http\Requests\PostRequest;
@@ -31,19 +31,27 @@ class PostController extends Controller{
 	public function create(){
 
 		return view('posts.add');
-	}
+    }
 
 	public function store(PostRequest $request){
 
-
-
-        $inputs = array_merge($request->all(), ['User_id' => $request->user()->User_id]);
-
-
-		$this->postRepository->store($inputs);
+        Post::create([
+            'Titre' => $request ->Titre,
+            'Description' => $request ->Description,
+            'User_id' => $request->user()->User_id,
+        ]);
 
 		return redirect(route('post.index'));
-	}
+    }
+
+
+    public function edit($id){
+
+        $posts = Post::find($id);
+        return view('posts.edit', compact('posts'));
+
+    }
+
 
 	public function destroy($id){
 

@@ -22,5 +22,5 @@ Auth::routes();
 Route::get('/profil', 'ChangerPasswordController@index');
 Route::post('/profil', 'ChangerPasswordController@store')->name('change.password');
 Route::get('/home', 'homeController@index');
-Route::resource('post', 'PostController', ['except' => ['show', 'edit', 'update']]);
+Route::resource('post', 'PostController', ['except' => ['show']]);
 Route::resource('user', 'UserController');
