@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use APP\Post;
+use APP\User;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
@@ -52,8 +53,15 @@ class PostController extends Controller{
 
     public function edit($id){
 
+
+
         $posts= Post::find($id);
 
+        if(auth()->user()->User_id !== $posts->User_id){
+
+            return redirect(route('post.index'));
+
+        }
       return view('posts.edit')->with('posts', $posts);
 
     }
@@ -70,9 +78,21 @@ class PostController extends Controller{
         return redirect(route('post.index'));
     }
 
+    public function show(){
+
+        $User_id = auth()->user()->User_id ;
+        $user = User::find($User_id);
+        return view('annonce')->with('posts', $user->posts);
+
+    }
 	public function destroy($id){
 
-		$posts = Post::find($id);
+        $posts = Post::find($id);
+        if(auth()->user()->User_id !== $posts->User_id){
+
+            return redirect(route('post.index'));
+
+        }
 
         $posts->delete();
 		return redirect(route('post.index'));
