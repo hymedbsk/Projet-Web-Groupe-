@@ -37,6 +37,17 @@
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
+              <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}">
+                    </div>
+                    @if($errors->has('g-recaptcha-response'))
+                        <span class="invalid-feedback" styles="display:block">
+                            <strong> {{$errors->first('g-recaptcha-response')}} </strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
               <div class="clearfix"></div>
               <div class="col-lg-12 text-center">
                 <div id="success"></div>
@@ -44,6 +55,7 @@
         {!! Form::close() !!}
               </div>
             </div>
+
           </form>
           <div class="alert alert-primary" role="alert">
             Aucunes des informations entrées ci-dessus ne sera sauvegardées.

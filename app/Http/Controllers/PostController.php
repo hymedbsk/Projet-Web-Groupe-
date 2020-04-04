@@ -78,13 +78,6 @@ class PostController extends Controller{
         return redirect(route('post.index'));
     }
 
-    public function show(){
-
-        $User_id = auth()->user()->User_id ;
-        $user = User::find($User_id);
-        return view('annonce')->with('posts', $user->posts);
-
-    }
 	public function destroy($id){
 
         $posts = Post::find($id);
