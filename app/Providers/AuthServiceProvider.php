@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -21,15 +21,10 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
 
-        $gate->define('edit-post', function ($user, $post) {
-
-            return $user->User_id == $post->User_id;
-
-          });
-
+        //
     }
 }

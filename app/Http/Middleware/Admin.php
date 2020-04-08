@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 
 class Admin
 {
+
     /**
      * Handle an incoming request.
      *
@@ -16,9 +17,11 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if($request->user()->admin){
+        if ($request->user()->admin)
+        {
             return $next($request);
         }
         return new RedirectResponse(url('/'));
     }
+
 }

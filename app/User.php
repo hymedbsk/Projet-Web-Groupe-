@@ -10,16 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = "users";
-    protected $primaryKey = "User_id";
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
     protected $fillable = [
-        'matricule','nom', 'prenom', 'email', 'password', 'Type'
+        'name', 'email', 'password',
     ];
 
     /**
@@ -40,16 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function events(){
 
-    public function setUpdatedAtAttribute($value)
-{
-    // to Disable updated_at
-}
-
-public function posts(){
-
-
-    return $this->hasMany('App\Post');
+        return $this->belongsToMany('App\event','userbyevent', 'id', 'id_Activite');
     }
-
 }

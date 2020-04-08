@@ -24,8 +24,8 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom' => 'required|min:1|max:20|alpha',
-            'prenom' => 'required|min:1|max:20|alpha',
+            'nom' => 'required|min:5|max:20|alpha',
+            'prenom' => 'required|min:5|max:20|alpha',
 			'email' => 'required|email',
 			'texte' => 'required|max:250'
         ];
