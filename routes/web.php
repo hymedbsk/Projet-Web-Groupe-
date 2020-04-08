@@ -19,9 +19,14 @@ Route::post('contact', 'ContactController@postForm');
 Route::view('palteforme', 'home');
 Route::view('compte','compte');
 Auth::routes();
-Route::get('/profil', 'ChangerPasswordController@index');
-Route::post('/profil', 'ChangerPasswordController@store')->name('change.password');
-Route::get('/home', 'homeController@index');
-Route::resource('post', 'PostController');
-Route::resource('user', 'UserController');
-Route::get('MesAnnonces', 'PostController@show');
+Route::get('/test', 'testcontroler@do'); //test
+Route::get('/user', 'UserController@index');
+Route::view('/error','error');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/testNotif', 'testControlleurNotif@main');
+
+Route::get('/testPivotTable','EventController@index'); //test
+Route::get('/listEtu','eventController@listUserToEvent')->name('listUserByEvent'); //real
+
+Route::get('/addUserToEvent/{user}', 'EventController@addUserToEvent')->name('addUserToEvent');

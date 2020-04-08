@@ -9,8 +9,11 @@
   <meta name="author" content="">
 
   <title>Ephec Entreprendre</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
+
+  <link href="{{ asset('css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -23,7 +26,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-              <a class="navbar-brand js-scroll-trigger" href="{{ url("/")}}">Ephec Entreprendre</a>
+              <a class="navbar-brand js-scroll-trigger" href="#page-top">Ephec Entreprendre</a>
               <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -47,44 +50,35 @@
                       </li>
 
                       <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">S'inscire</a>
+                        <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
                         </li>
-                </ul>
-                        @if(Auth::check() and Auth()->user()->accountChecked == 1)
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-uppercase nav-item"   href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->prenom }} <span class="caret"></span>
-                        </a>
 
-                            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+                                    @if(Auth::check())
 
-                                    <a class=" dropdown-item nav-item " href="{{ url('/profil') }}" >
-                                         <p>  Mon profil </p>
-                                     </a>
-                                     <a class=" dropdown-item nav-item " href="{{ url('/post/create') }}" >
-                                        <p>  Ajouter une annonce  </p>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('home') }}">Mon compte</a>
+                                    </li>
+
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
-                                @if(Auth()->user()->admin == 1)
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                    <a class=" dropdown-item nav-item " href="{{ url('/user') }}" >
-                                         <p>Vérifications des étudiants   </p>
-                                     </a>
-
-                                @endif
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                         onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                    </a>
-
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
                                 @endif
 
-
+                    </ul>
               </div>
             </div>
           </nav>

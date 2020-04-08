@@ -6,7 +6,7 @@
     <div class="container">
       <div class="intro-text">
         <div class="alert alert-danger" role="alert">
-            Votre inscription n'a pas encore été vérifier par un administrateur.
+            Votre inscription n'a pas encore été vérifiée par un administrateur.
           </div>
 </div>
 </div>
