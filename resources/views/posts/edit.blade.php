@@ -16,7 +16,7 @@
                         {!! Form::text('Titre', $posts->Titre, ['class' => 'form-control ']) !!}
                         {!! $errors->first('Titre', '<small class="help-block">:message</small>') !!}
                         </div>
-                    </div>
+                </div>
 
                 {{ Form::label('Description', 'Description')}}
                 <div class="col-md-12">
@@ -24,21 +24,17 @@
                         {!! Form::textarea ('Description', $posts->Description, ['class' => 'form-control ', 'placeholder' => 'Description (Une description claire et précise sur ce que tu proposes ou demandes) ']) !!}
                         {!! $errors->first('texte', '<small class="help-block">:message</small>') !!}
                         <p class="help-block text-danger"></p>
-                    </div>
+                </div>
 
 
               {!! Form::submit('Envoyer', ['class' => 'btn btn-info']) !!}
                     {!! Form::close() !!}
 
 
-<a href="javascript:history.back()" class="btn btn-warning">
- Retour</a>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
+                    <a href="javascript:history.back()" class="btn btn-warning">
+                    Retour</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

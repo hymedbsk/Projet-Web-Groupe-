@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
   <section class="page-section" id="services">
         <div class="container">
@@ -13,11 +12,13 @@
                                     <h5 class="card-title">{{ $post->Titre }}</h5>
                                     <p class="card-text">{{ $post->Description }}</p>
                                     <p class="sub-card"> {{ $post->user->prenom }} le {!! $post->Date->format('d-m-Y') !!} </p>
+                                    @if(Auth::user()->User_id == $post->User_id)
                                     <a href="{{ url('/post/'.$post->Post_id. '/edit')}}" class="btn btn-warning float-left"> Modifier </a>
                                     {{ Form::open(['action' => ['PostController@destroy', $post->Post_id], 'method' => 'POST'])}}
                                             {{Form::hidden('_method', 'DELETE')}}
                                             {{Form::submit('Supprimer', ['class' => 'btn btn-danger float-right', 'onclick' => 'return confirm(\'Vraiment supprimer cette annonce ?\')'] )}}
                                     {{Form::close()}}
+                                    @endif
                                 </div>
                             </div>
                         </div>
