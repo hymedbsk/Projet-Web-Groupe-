@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\URL;
 class PostController extends Controller{
     protected $postRepository;
 
-    protected $nbrPerPage = 15;
+    protected $nbrPerPage = 6;
 
     public function __construct(PostRepository $postRepository){
 
@@ -56,6 +56,7 @@ class PostController extends Controller{
 
 
         $posts= Post::find($id);
+
 
         if(auth()->user()->User_id !== $posts->User_id){
 
