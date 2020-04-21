@@ -27,6 +27,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/testNotif', 'testControlleurNotif@main');
 
 Route::get('/testPivotTable','EventController@index'); //test
+Route::get('/testboutonselect/{event}', 'EventController@selectEvent')->name('testboutonselect'); //test
+
 Route::get('/listEtu','eventController@listUserToEvent')->name('listUserByEvent'); //real
 
 Route::get('/addUserToEvent/{user}', 'EventController@addUserToEvent')->name('addUserToEvent');
+Route::get('/removeUserFromEvent/{user}', 'EventController@removeUserFromEvent')->name('removeUserFromEvent');
+
+Route::get('/selectEvent/{user}', 'EventController@selectEvent')->name('selectEvent');
+
+// vue générale event
+Route::get('/tableEvent', 'EventController@listEvent');
+    // info event
+Route::get('/infoEvent/{event}', 'EventController@infoEvent')->name('infoEvent');
