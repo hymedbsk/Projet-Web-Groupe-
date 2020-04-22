@@ -1,5 +1,7 @@
 # Projet Web - Groupe 16
 
+> [Accéder à l'environnement web de ce projet](http://entreprendre.che2-ephec.be/)
+
 ## Présentation du projet
 
 ### Problématique
