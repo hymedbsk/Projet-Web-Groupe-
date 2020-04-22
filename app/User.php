@@ -5,23 +5,18 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Carbon\Carbon;
-class User extends Authenticatable implements MustVerifyEmail
+
+class User extends Authenticatable
 {
     use Notifiable;
-
-    protected $table = "users";
-    public $primaryKey = "User_id";
-
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
     protected $fillable = [
-        'matricule','nom', 'prenom', 'email', 'password', 'Type'
+        'name', 'email', 'password',
     ];
 
     /**
@@ -42,15 +37,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function setUpdatedAtAttribute($value)
-{
-    // to Disable updated_at
-}
+    public function events(){
 
-public function posts(){
-
-
-    return $this->hasMany('App\Post');
+        return $this->belongsToMany('App\event','userbyevent', 'id', 'id_Activite');
     }
-
 }
