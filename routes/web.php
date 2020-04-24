@@ -24,6 +24,9 @@ Route::get('/user', 'UserController@index');
 Route::view('/error','error');
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('formPdf', 'FormPdfController@index');
+Route::post('genPdf', 'PDFMaker@gen');
+
 Route::get('/testNotif', 'testControlleurNotif@main');
 
 Route::get('/testPivotTable','EventController@index'); //test
