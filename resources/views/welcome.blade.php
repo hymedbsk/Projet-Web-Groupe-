@@ -328,7 +328,7 @@
                 <div class="col-md-4">
                 <ul class="list-inline quicklinks">
                     <li class="list-inline-item">
-                    <a href="#">Politique de confidentialité</a>
+                    <a href="confidentialite">Politique de confidentialité</a>
                     </li>
                     <li class="list-inline-item">
                     <a href="#">Condition d'utilisation</a>
