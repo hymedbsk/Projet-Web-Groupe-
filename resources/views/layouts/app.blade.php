@@ -47,14 +47,14 @@
                   </li>
                   @endguest
                   <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ url('/post') }}">Plate-forme</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ url('/post') }}">Plateforme</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{ url('/contact') }}">Contact</a>
                   </li>
                   @guest
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">S'inscire</a>
+                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
                     </li>
                 </ul>
                   @endguest
