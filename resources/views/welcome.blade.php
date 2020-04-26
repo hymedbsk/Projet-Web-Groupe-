@@ -331,7 +331,7 @@
                     <a href="confidentialite">Politique de confidentialité</a>
                     </li>
                     <li class="list-inline-item">
-                    <a href="#">Condition d'utilisation</a>
+                    <a href="cgu">Condition d'utilisation</a>
                     </li>
                 </ul>
                 </div>

@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::view('confidentialite', 'confidentialite');
+Route::view('cgu', 'cgu');
 Route::get('contact', 'ContactController@getForm');
 Route::post('contact', 'ContactController@postForm');
 Route::view('palteforme', 'home');
