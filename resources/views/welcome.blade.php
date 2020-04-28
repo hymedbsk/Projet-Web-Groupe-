@@ -44,14 +44,14 @@
                     </li>
                     @endguest
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{ url('/home') }}">Plate-forme</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ url('/home') }}">Plateforme</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ url('/contact') }}">Contact</a>
                     </li>
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">S'inscire</a>
+                        <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
                         </li>
                     </ul>
                     @endguest
@@ -328,10 +328,10 @@
                 <div class="col-md-4">
                 <ul class="list-inline quicklinks">
                     <li class="list-inline-item">
-                    <a href="#">Politique de confidentialité</a>
+                    <a href="confidentialite">Politique de confidentialité</a>
                     </li>
                     <li class="list-inline-item">
-                    <a href="#">Condition d'utilisation</a>
+                    <a href="cgu">Condition d'utilisation</a>
                     </li>
                 </ul>
                 </div>
