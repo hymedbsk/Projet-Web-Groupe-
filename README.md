@@ -1,6 +1,6 @@
 # Projet Web - Groupe 16
 
-> [Accéder à l'environnement web de ce projet](http://entreprendre.che2-ephec.be/)
+> [Accéder à l'environnement web de ce projet](http://entreprendre.che2-ephec.be/index.php/)
 
 ## Présentation du projet
 
