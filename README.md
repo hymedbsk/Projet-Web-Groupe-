@@ -1,7 +1,5 @@
 # Projet Web - Groupe 16
 
-> [Accéder à l'environnement web de ce projet](http://entreprendre.che2-ephec.be/index.php/)
-
 ## Présentation du projet
 
 ### Problématique
@@ -22,4 +20,4 @@ Branche master /doc
 
 ### Site Web :
 
- http://entreprendre.che2-ephec.be/
+ http://entreprendre.che2-ephec.be/index.php/
