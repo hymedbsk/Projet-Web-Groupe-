@@ -34,13 +34,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Messenger</a>
+            <a class="navbar-brand" href="#">EPHEC Entreprendre Messenger</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Accueil</a></li>
-                <li><a href="/messages">Messages @include('messenger.unread-count')</a></li>
-                <li><a href="/messages/create">Créer un nouveau message</a></li>
+                <li><a href="messages">Accueil</a></li>
+                <li><a href="messages">Messages @include('messenger.unread-count')</a></li>
+                <li><a href="messages/create">Créer un nouveau message</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
