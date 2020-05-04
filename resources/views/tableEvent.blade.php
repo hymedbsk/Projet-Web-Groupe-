@@ -38,19 +38,5 @@
                 </table>
             </div>
         </div>
-        <div class="col-6 info" style="display:none">
-            @foreach ($event->users as $user)
-
-            <tr>
-                <th>{!! $event->id_Activite!!}</th>
-                <th>{!! $event->Theme!!}</th>
-                <td>{!! $user->id!!}</td>
-                <td class="text-primary"><strong>{!! $user->name!!}</strong></td>
-                <td> <a class="btn btn-primary" href="{{route('removeUserFromEvent', $user)}}" role="button">Retirer</a></td>
-            </tr>
-
-            @endforeach 
-
-        </div>
     </div>
 @endsection
