@@ -42,4 +42,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\event','userbyevent', 'id', 'id_Activite');
     }
 
+    public function routeNotificationForMail($notification) {
+        
+        return $this->email_address;
+    }
+
 }

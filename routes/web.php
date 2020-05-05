@@ -56,3 +56,13 @@ Route::get('/addUserToEvent/{user}', 'EventController@addUserToEvent')->name('ad
 Route::get('/removeUserFromEvent/{user}', 'EventController@removeUserFromEvent')->name('removeUserFromEvent');
 
 Route::get('/selectEvent/{user}', 'EventController@selectEvent')->name('selectEvent');
+
+// Routes for notification system
+Route::get('send', 'NotifyController@index');
+
+Route::get('mail', function () {
+    $event = app\Event::find(1);
+
+    return (new app\Notifications\StatusUpdate($event))
+                ->toMail($event->user);
+});
