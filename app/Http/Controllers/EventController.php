@@ -42,52 +42,123 @@ class EventController extends Controller
 
      // FUNCTION FOR TEST ONLY //
 
-    public function listUserToEvent(){
+    public function globalView(){
 
         $events = event::get();
         $users = User::get();
 
-        return view('/listEtu', compact('events', 'users'));
+        return view('/globalView', compact('events', 'users'));
 
-    }
-
-    public function addUserToEvent(User $user){
-
-        $event = event::first();
-        $user->events()->syncWithoutDetaching([$event->id_Activite]);
-
-        return redirect()->route('listUserByEvent');
-    }
-
-    public function removeUserFromEvent(User $user){
-
-        $event = event::first();
-        $user->events()->detach($event->id_Activite);
-
-        return redirect()->route('listUserByEvent');
     }
 
     public function listEvent(){
 
         $events = event::get();
+
         return view('/tableEvent', compact('events'));
     }
 
     public function infoEvent (event $event){
+
         $event_id = $event->id_Activite;
-        //echo($event_id);
-        //echo(event::find($event_id));
         $users = event::find($event_id)->users;
-        //echo(intval($users));
+        
         return view('infoEvent', compact('event', 'users'));
     }
 
-    // public function selectEvent(Event $event){
-    //     event::all()->where('Event_Selected',1)
-    //                 ->update('Event_Selected',0);
-    //     event::get($event->id_Activite)->update('Event_Selected',1);
-    //     return redirect()->route('listUserByEvent');
-    // }
+    public function manageEvent (event $event){
+        
+        $event_id = $event->id_Activite;
 
+        $event = $event;
 
+        #echo($event_id);
+        
+        // utilisateur d'un event
+        $users = User::join('userbyevent', 'users.id', '=','userbyevent.id')
+            ->select('*')
+            ->where('id_Activite', '=', $event_id)
+            ->get();
+        #echo($users);
+        
+        // utilisateurs ne participant pas à l'event et n'ayant pas d'event
+
+        // select * FROM `users` 
+        // LEFT JOIN userbyevent on users.id = userbyevent.id 
+        // where userbyevent.id not in ( 
+        //     SELECT userbyevent.id 
+        //     FROM `userbyevent` LEFT JOIN users on users.id = userbyevent.id 
+        //     WHERE id_Activite = 2) 
+        // UNION SELECT * FROM `users` 
+        // LEFT JOIN userbyevent on users.id = userbyevent.id 
+        // WHERE userbyevent.id is null
+
+        //on sélectionne les utilisateurs ne participant à aucun évènements
+        $nonEventUsers = User::leftJoin('userbyevent', 'users.id', '=','userbyevent.id')
+                ->select('users.id')
+                ->whereNull('userbyevent.id');
+
+        // utilisateurs de l'évènement
+        $userEvent = userbyevent::leftJoin('users', 'users.id', '=','userbyevent.id')
+            ->select('userbyevent.id')
+            ->where('id_Activite', '=', $event_id);
+        
+        #echo($userEvent);
+        
+         // NOT($userEvent) UNION $nonEventUsers
+        $nonUsers = User::select('id')
+             ->whereNotIn('id', $userEvent) // id != $users->id ?
+             ->union($nonEventUsers);
+
+        $final = User::select('*')
+            ->whereIn('id', $nonUsers)
+            ->get();
+        #echo($final);
+        return view('manageEvent', compact('users', 'final', 'event'));
+    }
+
+    public function addUserToEvent(User $user, event $event){
+
+        echo($user);
+        echo($event);
+
+        //$user->events()->syncWithoutDetaching([$event->id_Activite]);
+        
+        //return redirect()->route('manageEvent');
+    }
+
+    public function removeUserFromEvent(User $user, event $event){
+
+        echo($user);
+        echo($event);
+
+        //$user->events()->detach($event->id_Activite);
+
+        //return redirect()->route('manageEvent',['event'=>$event]);
+            
+        //
+    }
+
+    public function test(User $user, event $event){
+        echo($user);
+        echo($event);
+    }
+
+    /////////////////////////////////////////////////
+    /////////       CREATE A EVENT          ///////// 
+    /////////////////////////////////////////////////
+
+    public function createEvent(){
+        echo("test");
+        // $data = request()->validate([
+
+        //     'name' => 'required|min:3',
+        //     'place' => 'required|min:3',
+        //     'prof' => 'required|min:3'
+
+        // ]);
+        // print_r($request);
+        #echo($request->input('prof'));
+        #return redirect()->route('newEvent');
+    }
 }

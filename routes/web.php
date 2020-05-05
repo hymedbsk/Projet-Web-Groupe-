@@ -29,14 +29,36 @@ Route::get('/testNotif', 'testControlleurNotif@main');
 Route::get('/testPivotTable','EventController@index'); //test
 Route::get('/testboutonselect/{event}', 'EventController@selectEvent')->name('testboutonselect'); //test
 
-Route::get('/listEtu','eventController@listUserToEvent')->name('listUserByEvent'); //real
+Route::get('/globalView','eventController@globalView')->name('globalView'); //real
 
-Route::get('/addUserToEvent/{user}', 'EventController@addUserToEvent')->name('addUserToEvent');
-Route::get('/removeUserFromEvent/{user}', 'EventController@removeUserFromEvent')->name('removeUserFromEvent');
+// validation etudiant
+Route::get('/listEtu', 'UserController@list')->name('list');
+    //del invalid user
+Route::get('/delUser/{user}', 'UserController@deleteInvalidUser')->name('delUser');
+    // approve valid user
+Route::get('/valUser/{user}', 'UserController@validUser')->name('valUser');
 
-Route::get('/selectEvent/{user}', 'EventController@selectEvent')->name('selectEvent');
 
 // vue générale event
 Route::get('/tableEvent', 'EventController@listEvent');
     // info event
 Route::get('/infoEvent/{event}', 'EventController@infoEvent')->name('infoEvent');
+    //manage event
+Route::get('/manageEvent/{event}', 'EventController@manageEvent')->name('manageEvent');
+    //add an user from a event
+Route::get('/addUserToEvent/{user}/{event}', 'EventController@addUserToEvent')->name('addUserToEvent');
+    //remove an user from a event
+Route::get('/removeUserFromEvent/{user}/{event}', 'EventController@removeUserFromEvent')->name('removeUserFromEvent');
+
+Route::get('/selectEvent/{user}', 'EventController@selectEvent')->name('selectEvent');
+
+
+// creer un event
+Route::view('/newEvent','newEvent');
+Route::any('/createEvent', 'EventController@createEvent')->name('createEvent');
+
+/////////////////////////////
+/////   TEST    ////////////
+////////////////////////////
+
+Route::get('/test/{user}/{event}', 'EventController@test')->name('test');

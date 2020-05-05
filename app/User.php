@@ -41,4 +41,5 @@ class User extends Authenticatable
 
         return $this->belongsToMany('App\event','userbyevent', 'id', 'id_Activite');
     }
+
 }
