@@ -16,7 +16,9 @@ class UserUpdateRequest extends FormRequest
 	{
 	
         return [
-            
+		'nom' => 'required|max:255',
+		
+		'prenom' => 'required|max:255'            
 	];
         }
 }

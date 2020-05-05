@@ -37,9 +37,9 @@ class PostController extends Controller{
 	public function store(PostRequest $request){
 
         $posts = new Post;
-        $posts->Titre = $request->input('Titre');
-        $posts->Description = $request->input('Description');
-        $posts->User_id = $request->user()->User_id;
+        $posts->titre = $request->input('Titre');
+        $posts->description = $request->input('Description');
+        $posts->User_id = $request->user()->id;
         $posts->save();
         /*Post::create([
             'Titre' => $request ->Titre,
@@ -56,9 +56,9 @@ class PostController extends Controller{
 
 
         $posts= Post::find($id);
+	
 
-
-        if(auth()->user()->User_id !== $posts->User_id){
+        if(auth()->user()->id !== $posts->User_id){
 
             return redirect(route('post.index'));
 
@@ -72,9 +72,10 @@ class PostController extends Controller{
 
 
         $posts = Post::find($id);
-        $posts->Titre = $request->input('Titre');
-        $posts->Description = $request->input('Description');
-        $posts->User_id = $request->user()->User_id;
+	
+        $posts->titre = $request->input('Titre');
+        $posts->description = $request->input('Description');
+        $posts->User_id = $request->user()->id;
         $posts->save();
         return redirect(route('post.index'));
     }
@@ -82,7 +83,7 @@ class PostController extends Controller{
 	public function destroy($id){
 
         $posts = Post::find($id);
-        if(auth()->user()->User_id !== $posts->User_id){
+        if(auth()->user()->id !== $posts->User_id){
 
             return redirect(route('post.index'));
 

@@ -11,8 +11,10 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
 
     protected $table = "users";
-    public $primaryKey = "User_id";
-
+    public $primaryKey = "id";
+const CREATED_AT ="cree_le";
+const DELETED_AT = 'supprimer_le';
+const UPDATED_AT = 'mis_a_jour_le';
 
     /**
      * The attributes that are mass assignable.

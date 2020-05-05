@@ -9,8 +9,8 @@ class Post extends Model{
     protected $table = 'post';
     protected $primaryKey = 'Post_id';
     protected $foreign_key = 'User_id';
-    protected $dates = ['Date'];
-    public $timestamps = false;
+    protected $dates = ['date'];
+   const UPDATED_AT = "modifier_le";    
     protected $fillable = ['User_id','Titre','Description'];
 
 	public function user(){
