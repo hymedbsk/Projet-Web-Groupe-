@@ -60,7 +60,7 @@
                   @endguest
                 </ul>
 
-        @if(Auth::check() and Auth()->user()->accountChecked == 1)
+        @if(Auth::check())
         <a id="navbarDropdown" class="nav-link dropdown-toggle text-uppercase "   href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             {{ Auth::user()->prenom }} <span class="caret"></span>
         </a>
@@ -75,10 +75,13 @@
                         <p>  Ajouter une annonce  </p>
                     </a>
 
-                @if(Auth()->user()->admin == 1)
+                @if(Auth()->user()->prof == 1)
 
                     <a class=" dropdown-item nav-item " href="{{ url('/user') }}" >
                          <p>Vérifications des étudiants   </p>
+                     </a>
+			<a class=" dropdown-item nav-item " href="{{ url('/user/statut') }}" >
+                         <p>Gestion des statuts </p>
                      </a>
 
                 @endif

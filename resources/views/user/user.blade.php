@@ -4,10 +4,10 @@
 
 
 <header class="masthead">
-    <div class="container">
+    <div class="container-fluid">
       <div class="intro-text">
     <br>
-    <div class="col-sm-offset-4 col-sm-4">
+    <div class="col-md-12">
         @if(session()->has('ok'))
             <div class="alert alert-success alert-dismissible">{!! session('ok') !!}</div>
         @endif
@@ -26,7 +26,7 @@ $(document).ready(function(){
     });
   });
 });
-</script>
+	</script>
 	  <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <table class="table">
                 <thead>
@@ -49,7 +49,8 @@ $(document).ready(function(){
                             <td class="text-primary"><strong>{!! $user->nom !!}</strong></td>
                             <td class="text-primary"><strong>{!! $user->email !!}</strong></td>
                             <td class="text-primary"><strong>{!! $user->accountChecked !!}</strong></td>
-                            <td class="text-primary"><strong>
+                          
+			    <td class="text-primary"><strong>
                             <label>
                                Vérifier {!! Form::checkbox('accountChecked', 1, null) !!}
                         </label>
@@ -63,6 +64,7 @@ $(document).ready(function(){
             </table>
 
         </div>
+	<br>
         {!! $links !!}
     </div>
 </div>
