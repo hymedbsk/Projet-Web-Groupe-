@@ -44,14 +44,14 @@
                         <a class="nav-link js-scroll-trigger" href="#structures">Structure</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{ url('/home') }}">Plateforme</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ url('/home') }}">Plate-forme</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ url('/contact') }}">Contact</a>
                       </li>
 
                       <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                        <a class="nav-link" href="{{ route('register') }}">S'inscire</a>
                         </li>
                 </ul>
                         @if(Auth::check() and Auth()->user()->accountChecked == 1)

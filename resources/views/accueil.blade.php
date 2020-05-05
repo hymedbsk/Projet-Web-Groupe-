@@ -3,6 +3,7 @@
 
 <head>
 
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -57,7 +58,7 @@
                     @endguest
 
                 </div>
-                        @if(Auth::check() and Auth()->user()->accountChecked == 1)
+                        @if(Auth::check())
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-uppercase nav-item"   href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->prenom }} <span class="caret"></span>
                         </a>

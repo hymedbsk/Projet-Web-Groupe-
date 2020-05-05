@@ -47,20 +47,20 @@
                   </li>
                   @endguest
                   <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ url('/post') }}">Plateforme</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ url('/post') }}">Plate-forme</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{ url('/contact') }}">Contact</a>
                   </li>
                   @guest
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                    <a class="nav-link" href="{{ route('register') }}">S'inscire</a>
                     </li>
                 </ul>
                   @endguest
                 </ul>
 
-        @if(Auth::check() and Auth()->user()->accountChecked == 1)
+        @if(Auth::check())
         <a id="navbarDropdown" class="nav-link dropdown-toggle text-uppercase "   href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             {{ Auth::user()->prenom }} <span class="caret"></span>
         </a>
@@ -75,10 +75,13 @@
                         <p>  Ajouter une annonce  </p>
                     </a>
 
-                @if(Auth()->user()->admin == 1)
+                @if(Auth()->user()->prof == 1)
 
                     <a class=" dropdown-item nav-item " href="{{ url('/user') }}" >
                          <p>Vérifications des étudiants   </p>
+                     </a>
+			<a class=" dropdown-item nav-item " href="{{ url('/user/statut') }}" >
+                         <p>Gestion des statuts </p>
                      </a>
 
                 @endif
