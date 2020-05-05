@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="page-section" id="services">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
             @if(session()->has('ok'))
@@ -19,6 +19,7 @@
                             <th>Nom</th>
                             <th>Prénom</th>
                             <th>E-mail</th>
+                            <th>Type</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -29,6 +30,14 @@
                                 <td class="text-primary"><strong>{!! $user->nom !!}</strong></td>
                                 <td class="text-primary"><strong>{!! $user->prenom !!}</strong></td>
                                 <td class="text-primary"><strong>{!! $user->email !!}</strong></td>
+                                @if($user->Type=="PR")
+                                <td class="text-primary"><strong>Préstataire</strong></td>
+                                @endif
+                                @if($user->Type=="EN")
+                                <td class="text-primary"><strong>Entrepreneur</strong></td>
+                                @endif
+
+
                                 <td>{!! link_to_route('user.edit', 'Modifier', [$user->User_id], ['class' => 'btn btn-warning btn-block']) !!}</td>
                                 <td>
                                     {!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->User_id]]) !!}
