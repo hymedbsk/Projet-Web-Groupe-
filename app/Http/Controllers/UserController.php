@@ -15,8 +15,10 @@ class UserController extends Controller
     protected $nbrPerPage = 4;
 
     public function __construct(UserRepository $userRepository)
-    {
+	    {
+		$this->middleware('prof'); 
 		$this->userRepository = $userRepository;
+		/*$this->middleware('prof');*/
 	}
 
 	public function index()
@@ -24,7 +26,7 @@ class UserController extends Controller
 		$users = $this->userRepository->getPaginate($this->nbrPerPage);
 		$links = $users->render();
 
-		return view('UserList', compact('users', 'links'));
+		return view('user.UserList', compact('users', 'links'));
 	}
 
 	public function create()
@@ -36,7 +38,7 @@ class UserController extends Controller
 	{
 		$user = $this->userRepository->store($request->all());
 
-		return redirect('UserList')->withOk("L'utilisateur " . $user->name . " a été créé.");
+		return redirect('user.UserList')->withOk("L'utilisateur " . $user->name . " a été créé.");
 	}
 
 	public function show($id)
@@ -50,7 +52,7 @@ class UserController extends Controller
 	{
 		$user = $this->userRepository->getById($id);
 
-		return view('edit',  compact('user'));
+		return view('user.edit',  compact('user'));
 	}
 
 	public function update(UserUpdateRequest $request, $id)
