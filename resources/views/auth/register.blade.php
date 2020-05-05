@@ -18,7 +18,7 @@
                                         <label for="matricule" class="col-md-4 col-form-label text-md-right">Matricule</label>
 
                                         <div class="col-md-6">
-                                            <input id="matricule" type="text" class="form-control @error('matricule') is-invalid @enderror" name="matricule" value="{{ old('matricule') }}" required autocomplete="matricule" autofocus max="8">
+                                            <input id="matricule" type="text" class="form-control @error('matricule') is-invalid @enderror" name="matricule" value="{{ old('matricule') }}" required autocomplete="matricule" autofocus maxlength="8" style="text-transform:uppercase">
 
                                             @error('matricule')
                                                 <span class="invalid-feedback" role="alert">

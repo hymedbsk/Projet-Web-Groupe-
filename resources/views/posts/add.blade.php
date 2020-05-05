@@ -9,12 +9,17 @@
                     <h2 class="justify-content-center"> Ajouter une annonce </h2>
                     <div class="card shadow-lg p-3 mb-5 bg-white rounded">
                         <div class="card-header">
-                            <p>
+                        @if(Auth::user()->type == "PR") 
+			   <p>
                                 En tant qu'étudiant prestataire tu peux créer une annonce pour partager ton savoir avec des étudiants entrepreneurs.
                             </p>
+			@endif
+
+			@if(Auth::user()->type == "EN")
                             <p>
                                 En tant qu'étudiant entrepreneur tu peux créer une annonce pour demander de l'aide dans un domaine que tu ne connais pas.
                             </p>
+			 @endif
                         </div>
                          <div class="card-body">
                             {!! Form::open(['route' => 'post.store','enctype'=>'multipart/form-data']) !!}
