@@ -7,8 +7,9 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class StatusUpdate extends Notification
-{
+use App\Event;
+
+class StatusUpdate extends Notification {
     use Queueable;
 
     /**
@@ -16,8 +17,7 @@ class StatusUpdate extends Notification
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         //
     }
 
@@ -27,8 +27,7 @@ class StatusUpdate extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
-    {
+    public function via($notifiable) {
         return ['mail'];
     }
 
@@ -38,8 +37,7 @@ class StatusUpdate extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
-    {
+    public function toMail($notifiable) {
         return (new MailMessage)
                     ->subject('EPHEC Entreprendre - Nouvelle notification')
                     
@@ -52,6 +50,7 @@ class StatusUpdate extends Notification
                     ->action('Allez jeter un coup d\'oeil', url('/'))
                     ->line('Bien à vous,')
                     ->line('L\'équipe EPHEC Entreprendre.')
+    ;
     }
 
     /**
@@ -60,8 +59,7 @@ class StatusUpdate extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
-    {
+    public function toArray($notifiable) {
         return [
             //
         ];

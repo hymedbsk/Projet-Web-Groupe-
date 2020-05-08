@@ -26,6 +26,7 @@ Route::get('/user', 'UserController@index');
 Route::view('/error','error');
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 // Routes for form and generation of PDF
 Route::get('formPdf', 'FormPdfController@index');
 Route::post('genPdf', 'PDFMaker@gen');
@@ -57,12 +58,13 @@ Route::get('/removeUserFromEvent/{user}', 'EventController@removeUserFromEvent')
 
 Route::get('/selectEvent/{user}', 'EventController@selectEvent')->name('selectEvent');
 
+
 // Routes for notification system
-Route::get('send', 'NotifyController@index');
+Route::get('send', 'NotifyController@index'); // TODO
 
 Route::get('mail', function () {
-    $event = app\Event::find(1);
+    $event = App\Event::find(1);
 
-    return (new app\Notifications\StatusUpdate($event))
-                ->toMail($event->user);
+    return (new App\Notifications\StatusUpdate($event))
+                ->toMail($event);
 });
