@@ -54,7 +54,7 @@
                   </li>
                   @guest
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">S'inscire</a>
+                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
                     </li>
                 </ul>
                   @endguest
