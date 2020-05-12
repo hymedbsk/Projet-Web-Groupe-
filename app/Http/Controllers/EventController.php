@@ -2,92 +2,128 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\EventRepository;
-use App\event;
-use App\User;
-use App\userbyevent;
 use Illuminate\Http\Request;
-
+use App\Event;
+use App\User;
+use App\Http\Requests\EventRequest;
+use Illuminate\Support\Facades\DB;
+use OpenApi\Annotations as OA;
 class EventController extends Controller
 {
-    protected $eventRepository;
 
-    public function __construct__(EventRepository $eventRepository)
-    {
-        $this->eventRepository = $eventRepository;
-    }
-    // FUNCTION FOR TEST ONLY //
+
+    public function __construct()
+	{
+        $this->middleware('auth');
+
+	}
+
+    /**
+     * @OA\Get(path="/event",
+     *      @OA\Response(
+     *          reponse="200",
+     *          description="Nos event",
+     *                    @OA\JsonContent(type="string", nom="Nom de l'event"),
+     *
+     *         )
+     *)
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
-    {   
-        // $test = User::first();
-        // $test->events()->sync([3]);
+    {
+        $events = Event::all();
 
-        //dd(event::first()->users()->toSql()); 
-
-        $events = event::get();
-        $users = User::get();
-        $userbyevent = userbyevent::get();
-        return view('testPivotTable', compact('events', 'users','userbyevent'));
-    }
-    public function selectEvent(Event $event){
-
-        event::where('Event_Selected',1)
-                    ->update(['Event_Selected'=>0]);    //reset
-
-        event::where("id_Activite", $event->id_Activite)
-                    ->update(['Event_Selected'=>1]);    //select
-        $events = event::get();
-        return view('testboutonselect', compact('events'));
+        return view('event.list', compact('events'));
     }
 
-     // FUNCTION FOR TEST ONLY //
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $users =  DB::table('document')->where('doc_id','=','1')->get();
+        return view('event.add', compact('users'));
+    }
 
-    public function listUserToEvent(){
 
-        $events = event::get();
-        $users = User::get();
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $events =  new Event;
+        $events->nom = $request->input('nom');
+        $events->Local = $request->input('local');
+        $events->Date = $request->input('date');
+        $events->Organisateur = $request->input('orga');
+        $events->save();
 
-        return view('/listEtu', compact('events', 'users'));
+        return redirect('event');
+    }
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $events= Event::findOrFail($id);
+        $users =  DB::table('users')->where('prof','=','1')->get();
+        if(auth()->user()->prof !== 1){
+
+            return redirect(route('event.index'));
+
+        }
+      return view('event.edit', compact('users', 'events'));
 
     }
 
-    public function addUserToEvent(User $user){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $events =  Event::findOrFail($id);
+        $events->nom = $request->input('nom');
+        $events->Local = $request->input('local');
+        $events->Date = $request->input('date');
+        $events->Organisateur = $request->input('orga');
+        $events->save();
 
-        $event = event::first();
-        $user->events()->syncWithoutDetaching([$event->id_Activite]);
-
-        return redirect()->route('listUserByEvent');
+        return redirect('event');
     }
 
-    public function removeUserFromEvent(User $user){
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $events = Event::findOrFail($id);;
+        if(auth()->user()->prof !== 1){
 
-        $event = event::first();
-        $user->events()->detach($event->id_Activite);
+        return redirect(route('event.index'));
 
-        return redirect()->route('listUserByEvent');
+        }
+
+        $events->delete();
+		return redirect(route('event.index'));
     }
-
-    public function listEvent(){
-
-        $events = event::get();
-        return view('/tableEvent', compact('events'));
-    }
-
-    public function infoEvent (event $event){
-        $event_id = $event->id_Activite;
-        //echo($event_id);
-        //echo(event::find($event_id));
-        $users = event::find($event_id)->users;
-        //echo(intval($users));
-        return view('infoEvent', compact('event', 'users'));
-    }
-
-    // public function selectEvent(Event $event){
-    //     event::all()->where('Event_Selected',1)
-    //                 ->update('Event_Selected',0);
-    //     event::get($event->id_Activite)->update('Event_Selected',1);
-    //     return redirect()->route('listUserByEvent');
-    // }
-
-
 }
