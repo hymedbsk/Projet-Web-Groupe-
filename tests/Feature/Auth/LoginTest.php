@@ -29,6 +29,13 @@ class LoginTest extends TestCase
         $response->assertRedirect('/home');
     }
 
+    public function test_guest_cannot_view_profile()
+    {
+        $response = $this->get('/profil');
+        $response->assertRedirect('/login');
+
+    }
+
     /**
      * Vérifie si l'utilisateur peut se connecter avec les bons identifiants
      * Vérifie si après la connection il est bien redirigé vers /home
@@ -45,6 +52,10 @@ class LoginTest extends TestCase
         $response->assertRedirect('/home');
         $this->assertAuthenticatedAs($user);
     }
+
+
+
+
 
     /**
      * Créer un utilisateur dans la base de données avec le mot de passe "i-love-laravel"
