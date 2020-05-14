@@ -1,11 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
-class Event extends Model
+class Event extends Controller
 {
     protected $table = 'event';
     protected $primaryKey = 'id_Activite';

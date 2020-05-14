@@ -9,7 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    protected $table = "users";
+    protected $primaryKey = 'User_id';
     /**
      * The attributes that are mass assignable.
      *
@@ -39,7 +40,7 @@ class User extends Authenticatable
 
     public function events(){
 
-        return $this->belongsToMany('App\event','userbyevent', 'id', 'id_Activite');
+        return $this->belongsToMany('App\Event','userbyevent', 'id', 'id_Activite');
     }
 
 }

@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/testNotif', 'testControlleurNotif@main');
 
-Route::get('/testPivotTable','EventController@index'); //test
+Route::get('/test','EventController@test'); //test
 Route::get('/testboutonselect/{event}', 'EventController@selectEvent')->name('testboutonselect'); //test
 
 Route::get('/globalView','eventController@globalView')->name('globalView'); //real
@@ -40,7 +40,7 @@ Route::get('/valUser/{user}', 'UserController@validUser')->name('valUser');
 
 
 // vue générale event
-Route::get('/tableEvent', 'EventController@listEvent');
+Route::get('/tableEvent', 'EventController@listEvent')->name('listEvent');
     // info event
 Route::get('/infoEvent/{event}', 'EventController@infoEvent')->name('infoEvent');
     //manage event
@@ -57,8 +57,21 @@ Route::get('/selectEvent/{user}', 'EventController@selectEvent')->name('selectEv
 Route::view('/newEvent','newEvent');
 Route::any('/createEvent', 'EventController@createEvent')->name('createEvent');
 
+// code Hymed creation/modification/suppression d'event
+
+Route::get('/event', 'EventController@index')->name('event.index');
+Route::post('/event', 'EventController@store')->name('event.store');
+Route::get('/event/create', 'EventController@create')->name('event.create');
+
+Route::get('/event/{event}/edit', 'EventController@edit')->name('event.edit');
+
+Route::put('/event/{event}', 'EventController@update')->name('event.update');
+Route::delete('/event/{event}', 'EventController@destroy')->name('event.delete');
+
+//
+
 /////////////////////////////
 /////   TEST    ////////////
 ////////////////////////////
 
-Route::get('/test/{user}/{event}', 'EventController@test')->name('test');
+Route::get('/test', 'TestController@index')->name('test');

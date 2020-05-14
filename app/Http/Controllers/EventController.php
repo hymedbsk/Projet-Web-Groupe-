@@ -3,48 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\EventRepository;
-use App\event;
+use App\Event;
 use App\User;
 use App\userbyevent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
     protected $eventRepository;
 
-    public function __construct__(EventRepository $eventRepository)
-    {
-        $this->eventRepository = $eventRepository;
+    public function __construct(){
+
+        $this->middleware('auth');
+        $this->middleware('admin');
+
     }
     // FUNCTION FOR TEST ONLY //
-    public function index()
-    {   
-        // $test = User::first();
-        // $test->events()->sync([3]);
 
-        //dd(event::first()->users()->toSql()); 
+    public function test(){
 
-        $events = event::get();
+        #$events = DB::table('event')->get();
+        $events = Event::all();
         $users = User::get();
-        $userbyevent = userbyevent::get();
-        return view('testPivotTable', compact('events', 'users','userbyevent'));
-    }
-    public function selectEvent(Event $event){
-
-        event::where('Event_Selected',1)
-                    ->update(['Event_Selected'=>0]);    //reset
-
-        event::where("id_Activite", $event->id_Activite)
-                    ->update(['Event_Selected'=>1]);    //select
-        $events = event::get();
-        return view('testboutonselect', compact('events'));
+        echo($users);
+        echo($events);
     }
 
      // FUNCTION FOR TEST ONLY //
 
     public function globalView(){
 
-        $events = event::get();
+        $events = Event::get();
+        #echo($events);
         $users = User::get();
 
         return view('/globalView', compact('events', 'users'));
@@ -53,20 +44,22 @@ class EventController extends Controller
 
     public function listEvent(){
 
-        $events = event::get();
+        $events = DB::table('event')->get();
 
-        return view('/tableEvent', compact('events'));
+        return view('/tableEvent', ['events'=>$events]);
     }
 
-    public function infoEvent (event $event){
+    public function infoEvent ($event_id){
 
-        $event_id = $event->id_Activite;
-        $users = event::find($event_id)->users;
-        
+        //$event_id = $event_id;
+        $event = Event::find($event_id);
+
+        $users = Event::find($event_id)->users;
+
         return view('infoEvent', compact('event', 'users'));
     }
 
-    public function manageEvent (event $event){
+    public function manageEvent (Event $event){
         
         $event_id = $event->id_Activite;
 
@@ -75,90 +68,151 @@ class EventController extends Controller
         #echo($event_id);
         
         // utilisateur d'un event
-        $users = User::join('userbyevent', 'users.id', '=','userbyevent.id')
+        $users = User::join('userbyevent', 'users.User_id', '=','userbyevent.id')
             ->select('*')
             ->where('id_Activite', '=', $event_id)
             ->get();
-        #echo($users);
-        
-        // utilisateurs ne participant pas à l'event et n'ayant pas d'event
-
-        // select * FROM `users` 
-        // LEFT JOIN userbyevent on users.id = userbyevent.id 
-        // where userbyevent.id not in ( 
-        //     SELECT userbyevent.id 
-        //     FROM `userbyevent` LEFT JOIN users on users.id = userbyevent.id 
-        //     WHERE id_Activite = 2) 
-        // UNION SELECT * FROM `users` 
-        // LEFT JOIN userbyevent on users.id = userbyevent.id 
-        // WHERE userbyevent.id is null
 
         //on sélectionne les utilisateurs ne participant à aucun évènements
-        $nonEventUsers = User::leftJoin('userbyevent', 'users.id', '=','userbyevent.id')
-                ->select('users.id')
+        $nonEventUsers = User::leftJoin('userbyevent', 'users.User_id', '=','userbyevent.id')
+                ->select('users.User_id')
                 ->whereNull('userbyevent.id');
 
         // utilisateurs de l'évènement
-        $userEvent = userbyevent::leftJoin('users', 'users.id', '=','userbyevent.id')
+        $userEvent = userbyevent::leftJoin('users', 'users.User_id', '=','userbyevent.id')
             ->select('userbyevent.id')
             ->where('id_Activite', '=', $event_id);
         
-        #echo($userEvent);
-        
          // NOT($userEvent) UNION $nonEventUsers
-        $nonUsers = User::select('id')
-             ->whereNotIn('id', $userEvent) // id != $users->id ?
+        $nonUsers = User::select('User_id')
+             ->whereNotIn('User_id', $userEvent) 
              ->union($nonEventUsers);
 
         $final = User::select('*')
-            ->whereIn('id', $nonUsers)
+            ->whereIn('User_id', $nonUsers)
             ->get();
-        #echo($final);
         return view('manageEvent', compact('users', 'final', 'event'));
     }
 
-    public function addUserToEvent(User $user, event $event){
+    public function addUserToEvent(User $user, Event $event){
 
         echo($user);
         echo($event);
 
-        //$user->events()->syncWithoutDetaching([$event->id_Activite]);
+        $user->events()->syncWithoutDetaching([$event->id_Activite]);
         
-        //return redirect()->route('manageEvent');
+        return redirect()->route('manageEvent',['event'=>$event]);
     }
 
-    public function removeUserFromEvent(User $user, event $event){
+    public function removeUserFromEvent(User $user, Event $event){
 
         echo($user);
         echo($event);
 
-        //$user->events()->detach($event->id_Activite);
+        $user->events()->detach($event->id_Activite);
 
-        //return redirect()->route('manageEvent',['event'=>$event]);
+        return redirect()->route('manageEvent',['event'=>$event]);
             
-        //
     }
 
-    public function test(User $user, event $event){
-        echo($user);
-        echo($event);
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $events = Event::all();
+
+        return view('event.list', compact('events'));
     }
 
-    /////////////////////////////////////////////////
-    /////////       CREATE A EVENT          ///////// 
-    /////////////////////////////////////////////////
-
-    public function createEvent(){
-        echo("test");
-        // $data = request()->validate([
-
-        //     'name' => 'required|min:3',
-        //     'place' => 'required|min:3',
-        //     'prof' => 'required|min:3'
-
-        // ]);
-        // print_r($request);
-        #echo($request->input('prof'));
-        #return redirect()->route('newEvent');
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $users =  User::where('prof','=','1')->get();
+        return view('event.add', compact('users'));
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $events =  new Event;
+        $events->nom = $request->input('nom');
+        $events->Local = $request->input('local');
+        $events->Date = $request->input('date');
+        $events->Organisateur = $request->input('orga');
+        $events->save();
+
+        return redirect('event');
+    }
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $events= Event::findOrFail($id);
+        $users =  tablUser::e('users')->where('prof','=','1')->get();
+        if(auth()->user()->prof !== 1){
+
+            return redirect(route('event.index'));
+
+        }
+      return view('event.edit', compact('users', 'events'));
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $events =  Event::findOrFail($id);
+        $events->nom = $request->input('nom');
+        $events->Local = $request->input('local');
+        $events->Date = $request->input('date');
+        $events->Organisateur = $request->input('orga');
+        $events->save();
+
+        return redirect('event');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $events = Event::findOrFail($id);;
+        if(auth()->user()->prof !== 1){
+
+        return redirect(route('event.index'));
+
+        }
+
+        $events->delete();
+		return redirect(route('event.index'));
+    }
+
 }
