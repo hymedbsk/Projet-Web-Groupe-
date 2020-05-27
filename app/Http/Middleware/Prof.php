@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Middleware;
-
-use Closure;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-class Admin
-{
+use Closure;
+use Auth;
+class Prof{
     /**
      * Handle an incoming request.
      *
@@ -16,11 +14,12 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-	$user = Auth::user();
-
-        if($user->prof == 1){
-            return $next($request);
-        }
-        return new RedirectResponse(url('/'));
+	if (Auth::user()->prof==1){
+        return $next($request);
+	}
+	else{
+	return new RedirectResponse(url('home'));
     }
+	
+	}
 }

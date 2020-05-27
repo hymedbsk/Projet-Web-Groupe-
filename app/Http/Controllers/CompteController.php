@@ -43,9 +43,10 @@ class CompteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        $user = User::findOrFail($id);
+	return view('prestataire', compact('user'));
     }
 
     /**
@@ -100,3 +101,4 @@ class CompteController extends Controller
 		return view('confirm');
     }
 }
+

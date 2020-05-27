@@ -94,10 +94,10 @@ class StatutController extends Controller
             else if($user->type == 'PR'){
              User::where('id','=', $user->id)->update(['type'=> 'EN']);
             Session::flash('message', 'Utilisateur mise        jour');
-        return redirect('user');
+        return redirect('statut');
             }else{
 
-                return redirect('user');
+                return redirect('statut');
             }
     }
 
