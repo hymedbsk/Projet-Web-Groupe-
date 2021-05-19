@@ -13,15 +13,13 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod ssl
 RUN a2enmod rewrite
 
-RUN ln -s /etc/apache2/sites-available/entreprendre.conf /etc/apache2/sites-enabled
+RUN ln -s /etc/apache2/sites-available/portefolio.conf /etc/apache2/sites-enabled
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY entreprendre.conf /etc/apache2/sites-available
+COPY portefolio.conf /etc/apache2/sites-available
 
-
-RUN composer create-project laravel/laravel=5.8 --prefer-dist /var/www/html
 RUN a2dissite 000-default.conf
-RUN a2ensite entreprendre.conf
+RUN a2ensite portefolio.conf
 
 EXPOSE 80 443
 
