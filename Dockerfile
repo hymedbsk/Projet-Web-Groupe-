@@ -22,5 +22,4 @@ RUN a2dissite 000-default.conf
 RUN a2ensite portefolio.conf
 
 EXPOSE 80 443
-
 CMD apachectl -DFOREGROUND
