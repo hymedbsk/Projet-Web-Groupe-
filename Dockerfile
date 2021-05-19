@@ -5,9 +5,9 @@ RUN a2enmod ssl
 RUN a2enmod rewrite
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY entreprendre.conf /etc/apache2/sites-available
+COPY portefolio.conf /etc/apache2/sites-available
 
-RUN ln -s /etc/apache2/sites-available/entreprendre.conf /etc/apache2/sites-enabled
+RUN ln -s /etc/apache2/sites-available/portefolio.conf /etc/apache2/sites-enabled
 
 EXPOSE 80 443
 
